@@ -1,0 +1,5 @@
+<%= form_for [@playlist] do |f| %>
+  <%= f.label :users %>
+  <%= f.select :users,options_from_collection_for_select(User.all, :id, :title), {}, {multiple: true } %>
+  <%= f.submit "Share" %>
+  <% end %>

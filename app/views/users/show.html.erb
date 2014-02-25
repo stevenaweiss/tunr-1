@@ -6,14 +6,16 @@
 
 <%= link_to "Create Playlist", new_user_playlist_path(@user) %>
 <p>
-<% @user.playlists.each do |playlist| %>
-<%= link_to "#{playlist.title}", playlist_path(playlist) %>
-<%= link_to "Share Playlist", new_playlist_user_path %>
-  <% end %>
-</p>
-
 
 <p><%= link_to "Edit My Info", edit_user_path(@user) %></p>
+<p>
+
+<% @user.playlists.each do |playlist| %>
+<%= link_to "#{playlist.title}", playlist_path(playlist)%>
+
+<%= link_to "Share Playlist", new_user_playlist_user_path(@user.id) %>
+  <% end %>
+</p>
 
 <%= form_tag user_path(@user), method: "delete" do %>
   <%= submit_tag("Delete My Account") %>

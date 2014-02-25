@@ -38,13 +38,28 @@ describe "a user can share a playlist" do
   let(:playlist) do
     Playlist.create!({
       title: "Jamz",
-      user_id: creator
+      user: creator
       })
   end
 
+  # it "creates a playlist" do
+  #   login(creator)
+  #   visit user_path(creator)
+  #   click_link "Create Playlist"
+  #   fill_in "Title", with: "Jamz"
+  #   click_button "Create"
+  # end
+
   it "shares a playlist" do
     login(creator)
+    playlist
+    creator.playlists<<playlist
+    shared
+    shunned
+    save_and_open_page
     visit user_path(creator)
+    #binding.pry
+    save_and_open_page
     click_link "Share Playlist"
     select shared.name, from: "playlist_users"
     
@@ -61,6 +76,7 @@ describe "a user can share a playlist" do
 
   def login(user)
     visit "/login"
+
     fill_in :email, with: user.email
     fill_in :password, with: user.password
     # save_and_open_page
